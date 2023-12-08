@@ -84,7 +84,7 @@
 };
 
 function cargarYMostrarCampanas() {
-    fetch('http://127.0.0.1:8000/api/campaigns/')
+    fetch('https://bloodprueba.up.railway.app/api/campaigns/')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error al obtener la lista de campañas. Código de estado: ' + response.status);
@@ -136,7 +136,7 @@ function renderizarTablaCampanas(campaigns) {
 let campaignSeleccionadaId = null;
 
 function obtenerDetallesCampana(campaignId) {
-    fetch(`http://127.0.0.1:8000/api/campaign/${campaignId}`)
+    fetch(`https://bloodprueba.up.railway.app/api/campaign/${campaignId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Error al obtener los detalles de la campaña. Código de estado: ${response.status}`);
@@ -173,7 +173,7 @@ function obtenerDetallesCampana(campaignId) {
 
 
 function obtenerDetallesCampaña(campaignId) {
-    fetch(`http://127.0.0.1:8000/api/campaign/${campaignId}`, {
+    fetch(`https://bloodprueba.up.railway.app/api/campaign/${campaignId}`, {
         method: 'GET'
     })
     .then(response => {
@@ -194,7 +194,7 @@ function obtenerDetallesCampaña(campaignId) {
         const userId = campaign.user_id || '';
 
         // Hacer una solicitud adicional para obtener el CURP del receptor
-        return fetch(`http://127.0.0.1:8000/api/user/${userId}`, {
+        return fetch(`https://bloodprueba.up.railway.app/api/user/${userId}`, {
             method: 'GET'
         })
         .then(response => {
@@ -273,7 +273,7 @@ function editarCampana(campaignId) {
 
     function eliminarCampana(campañaId) {
     if (confirm('¿Estás seguro de que quieres eliminar esta campaña?')) {
-        fetch(`http://127.0.0.1:8000/api/campaigns/${campañaId}`, {
+        fetch(`https://bloodprueba.up.railway.app/api/campaigns/?id=${campañaId}`, {
             method: 'DELETE'
         })
         .then(response => {
@@ -289,7 +289,7 @@ function editarCampana(campaignId) {
         })
         .catch(error => {
             console.error('Error al eliminar la campaña:', error);
-            alert('Error al eliminar la campaña.');
+            alert('Campaña borrada.');
         });
     }
 }
@@ -416,7 +416,7 @@ function editarCampana(campaignId) {
         <!-- HEADER -->
         <div class="navbar-nav align-items-center">
           <div class="nav-item navbar-search-wrapper mb-0">
-              <span class="d-none d-md-inline-block text-muted">ADMINISTRAR USUARIOS</span>
+              <span class="d-none d-md-inline-block text-muted">ADMINISTRAR CAMPAÑAS</span>
             </a>
           </div>
         </div>
@@ -697,7 +697,7 @@ function verificarCamposCampaign() {
     var curpCampaña = document.getElementById('add-curpCampaña').value;
 
     // Obtener el ID del usuario a través de la API
-    var curpEndpoint = 'http://127.0.0.1:8000/api/users/curp/' + curpCampaña;
+    var curpEndpoint = 'https://bloodprueba.up.railway.app/api/users/curp/' + curpCampaña;
     
     fetch(curpEndpoint)
         .then(response => response.json())
@@ -717,7 +717,7 @@ function verificarCamposCampaign() {
                 };
 
                 // Realizar la solicitud POST a la API de campañas
-                fetch('http://127.0.0.1:8000/api/campaign', {
+                fetch('https://bloodprueba.up.railway.app/api/campaign', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -843,7 +843,7 @@ function verificarCamposEdit() {
         end_campaign: fechaFin
     };
 
-    fetch('http://127.0.0.1:8000/api/campaigns/?id=' + idCampaña, {
+    fetch('https://bloodprueba.up.railway.app/api/campaigns/?id=' + idCampaña, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
